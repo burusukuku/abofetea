@@ -26,10 +26,12 @@
 <h1>Mariano Rajoy</h1>
 
 <span>Abofetealo!!</span>
-
+<audio preload id="neonclip">
+  <source src="/sonidos/plash.mp3" type="audio/mpeg">
+</audio>
 <div aling="center" class="in enterleave">
   <div class="out">
-  <img src="/imagenes/rajoy.jpg" width="228px" height="293px">
+  <img onmouseover="this.src='/imagenes/rajoy.jpg'; document.getElementById('neonclip').play()" onmouseout="this.src='/imagenes/rajoy.jpg' "src="/imagenes/rajoy.jpg" document.getElementById('neonclip').play()" width="228px" height="293px">
   </div>
 </div>
 
