@@ -11,39 +11,15 @@
 |
 */
 
-Route::get('/','HomeController@index', function()
-{
-	return View::make('HomeController.index');
-});
+Route::get('/',array('as' => 'index', 'uses' => 'HomeController@index'));
+Route::get('/sobre', array('as' => 'sobre', 'uses' => 'HomeController@sobre'));
+Route::get('/contacto',array('as' => 'contacto', 'uses' => 'HomeController@contacto'));
+Route::get('/donar',array('as' => 'donar', 'uses' => 'HomeController@donar'));
 
-Route::get('/sobre','HomeController@sobre', function()
-{
-    return View::make('HomeController.sobre');
-});
+Route::get('/rajoy',array('as' => 'rajoy', 'uses' => 'politicos@rajoy'));
+Route::get('/soraya',array('as' => 'soraya', 'uses' => 'politicos@soraya'));
 
-Route::get('/contacto','HomeController@contacto', function()
-{
-    return View::make('HomeController.contacto');
-});
 
-Route::get('/donar','HomeController@donar', function()
-{
-    return View::make('HomeController.donar');
-});
-Route::get('/rajoy','politicos@rajoy', function()
-{
-    return View::make('politicos.rajoy');
-});
-
-//Registro de Rutas
-
-Route::any('/' , array('as' => 'index', 'uses' => 'HomeController@index'));
-Route::any('/sobre' , array('as' => 'sobre', 'uses' => 'HomeController@sobre'));
-Route::any('/contacto' , array('as' => 'contacto', 'uses' => 'HomeController@contacto'));
-Route::any('/donar' , array('as' => 'donar', 'uses' => 'HomeController@donar'));
-
-Route::any('/rajoy' , array('as' => 'rajoy', 'uses' => 'politicos@rajoy'));
-Route::any('/soraya' , array('as' => 'soraya', 'uses' => 'politicos@soraya'));
 
 // Redireccion a la página de error 404
 
