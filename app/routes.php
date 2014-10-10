@@ -17,6 +17,9 @@ Route::get('/contacto',array('as' => 'contacto', 'uses' => 'HomeController@conta
 Route::get('/donar',array('as' => 'donar', 'uses' => 'HomeController@donar'));
 
 Route::get('/rajoy',array('as' => 'rajoy', 'uses' => 'politicos@rajoy'));
+
+
+
 Route::get('/soraya',array('as' => 'soraya', 'uses' => 'politicos@soraya'));
 
 

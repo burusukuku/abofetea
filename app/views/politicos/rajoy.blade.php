@@ -26,7 +26,8 @@
 <h1>Mariano Rajoy</h1>
 
 
-<span>Abofetealo!!</span>
+<span id="texto">Abofetealo!!</span>
+<span id="value">Aqui!!</span>
 <audio preload id="neonclip">
   <source src="/sonidos/plash.mp3" type="audio/mpeg">
 </audio>
@@ -45,13 +46,31 @@ var n = 0;
 $( "div.enterleave" )
   .mouseenter(function() {
     n += 1;
-    $( "div.contenedor" ).find( "span" ).text( "ZAS!!" );
+    $( "#texto" ).text( "ZAS!!" );
 
   })
   .mouseleave(function() {
-    $( "div.contenedor" ).find( "span" ).text( "Llevas " + n + " Bofetadas" );
+    $( "#texto" ).text( "Llevas " + n + " Bofetadas" );
     document.getElementById("dato").value=n;
   });
+
+$(document).ready(function() {
+    function getRandValue(){
+        value = $('#value').text();
+        //var dataString = 'value='+value;
+
+        $.ajax({
+            type: "POST",
+            url: "add.php",
+            //data: dataString,
+            success: function() {
+                $('#value').text(n);
+            }
+        });
+    }
+
+    setInterval(getRandValue, 3000);
+ });
 </script>
 
 <?

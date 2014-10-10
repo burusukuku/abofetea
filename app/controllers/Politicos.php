@@ -19,6 +19,10 @@ class Politicos extends BaseController {
     {
         return View::make('Politicos.rajoy');
     }
+
+
+
+
     public function soraya()
     {
         return View::make('Politicos.soraya');
