@@ -26,8 +26,9 @@
 <h1>Mariano Rajoy</h1>
 
 
+<span id="value"></span><br>
 <span id="texto">Abofetealo!!</span>
-<span id="value">Aqui!!</span>
+
 <audio preload id="neonclip">
   <source src="/sonidos/plash.mp3" type="audio/mpeg">
 </audio>
@@ -47,29 +48,53 @@ $( "div.enterleave" )
   .mouseenter(function() {
     n += 1;
     $( "#texto" ).text( "ZAS!!" );
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            url: "/bofetada",
+            success: function(data) {
+              //console.log("Llega aquí :O");  Sirve para depurar
+                  $('#value').text("Ya le han dado: " + data.bofetadas + " bofetadas");
+              }
+        },"json");
 
   })
   .mouseleave(function() {
     $( "#texto" ).text( "Llevas " + n + " Bofetadas" );
-    document.getElementById("dato").value=n;
+    //document.getElementById("dato").value=n;
   });
 
 $(document).ready(function() {
-    function getRandValue(){
-        value = $('#value').text();
-        //var dataString = 'value='+value;
+iniciarcontador();
+var dadas = '0';
+function iniciarcontador(){
+    var nombre = 'rajoy';
+    var dataString = 'nombre='+nombre;
+      $.ajax({
+          type: "POST",
+          dataType: 'json',
+          url: "/iniciarcontador",
+          data: dataString,
+          success: function(data) {
+          //console.log("Llega aquí :O");  Sirve para depurar
+           console.log(dadas);
+                if(dadas==0){
+                $('#value').text("Ya le han dado: " + data.bofetadas + " bofetadas");
+                dadas=data.bofetadas;
+                }else{
+                var nuevas=data.bofetadas;
+                var relacion = (nuevas-dadas)%10;
+                for(var i=0; i<=8; i++){
+                $('#value').text("Ya le han dado: " + dadas+relacion + " bofetadas");
+                sleep(1000);
+                }
+                $('#value').text("Ya le han dado: " + nuevas + " bofetadas");
+                }
+          }
+      },"json");
+      }
+      setInterval(iniciarcontador, 10000); // para ejecutarse cada 10 segundos
 
-        $.ajax({
-            type: "POST",
-            url: "add.php",
-            //data: dataString,
-            success: function() {
-                $('#value').text(n);
-            }
-        });
-    }
-
-    setInterval(getRandValue, 3000);
  });
 </script>
 

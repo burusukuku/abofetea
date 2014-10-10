@@ -22,7 +22,23 @@ Route::get('/rajoy',array('as' => 'rajoy', 'uses' => 'politicos@rajoy'));
 
 Route::get('/soraya',array('as' => 'soraya', 'uses' => 'politicos@soraya'));
 
+Route::post('/bofetada',array('as'=>'bofetada','uses'=>function(){
+    if(Request::ajax())
+    {
+        DB::table('politicos')->increment('bofetadas', 1, array('nombre' => 'rajoy'));
+        $bofetadas = DB::table('politicos')->where('nombre', 'rajoy')->pluck('bofetadas');
+        return Response::json(['bofetadas' => $bofetadas]);
+    }
+}));
 
+Route::post('/iniciarcontador',array('as'=>'iniciarcontador','uses'=>function(){
+    $data = Input::all();
+    if(Request::ajax())
+    {
+        $bofetadas = DB::table('politicos')->where('nombre', 'rajoy')->pluck('bofetadas');
+        return Response::json(['bofetadas' => $bofetadas]);
+    }
+}));
 
 // Redireccion a la página de error 404
 
