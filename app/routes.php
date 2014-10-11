@@ -23,10 +23,11 @@ Route::get('/rajoy',array('as' => 'rajoy', 'uses' => 'politicos@rajoy'));
 Route::get('/soraya',array('as' => 'soraya', 'uses' => 'politicos@soraya'));
 
 Route::post('/bofetada',array('as'=>'bofetada','uses'=>function(){
+    $data = Input::all();
     if(Request::ajax())
     {
-        DB::table('politicos')->increment('bofetadas', 1, array('nombre' => 'rajoy'));
-        $bofetadas = DB::table('politicos')->where('nombre', 'rajoy')->pluck('bofetadas');
+        DB::table('politicos')->where('nombre', $data['nombre'])->increment('bofetadas');
+        $bofetadas = DB::table('politicos')->where('nombre', $data['nombre'])->pluck('bofetadas');
         return Response::json(['bofetadas' => $bofetadas]);
     }
 }));
@@ -35,7 +36,7 @@ Route::post('/iniciarcontador',array('as'=>'iniciarcontador','uses'=>function(){
     $data = Input::all();
     if(Request::ajax())
     {
-        $bofetadas = DB::table('politicos')->where('nombre', 'rajoy')->pluck('bofetadas');
+        $bofetadas = DB::table('politicos')->where('nombre', $data['nombre'])->pluck('bofetadas');
         return Response::json(['bofetadas' => $bofetadas]);
     }
 }));
